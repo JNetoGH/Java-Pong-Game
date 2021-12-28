@@ -1,16 +1,13 @@
 package com.eurostudios.game_engine_classes;
 
+import com.eurostudios.entities.Enemy;
 import com.eurostudios.entities.Player;
-
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
 public class KeyboardController implements KeyListener {
 
-    static private Player player;
-
     KeyboardController () {
-        player = PongGameLoop.player;
         PongWindow.canvas.addKeyListener(this);
     }
 
@@ -19,10 +16,16 @@ public class KeyboardController implements KeyListener {
         int key = e.getKeyCode();
         switch (key) {
             case KeyEvent.VK_UP:
-                player.goingUp = true;
+                Enemy.goingUp = true;
                 break;
             case KeyEvent.VK_DOWN:
-                player.goingDown = true;
+                Enemy.goingDown = true;
+                break;
+            case KeyEvent.VK_W:
+                Player.goingUp = true;
+                break;
+            case KeyEvent.VK_S:
+                Player.goingDown = true;
                 break;
         }
     }
@@ -32,15 +35,20 @@ public class KeyboardController implements KeyListener {
         int key = e.getKeyCode();
         switch (key) {
             case KeyEvent.VK_UP:
-                player.goingUp = false;
+                Enemy.goingUp = false;
                 break;
             case KeyEvent.VK_DOWN:
-                player.goingDown = false;
+                Enemy.goingDown = false;
+                break;
+            case KeyEvent.VK_W:
+                Player.goingUp = false;
+                break;
+            case KeyEvent.VK_S:
+                Player.goingDown = false;
                 break;
         }
     }
 
     @Override
     public void keyTyped(KeyEvent e) {}
-
 }

@@ -10,7 +10,6 @@ public class PongExe {
         // INITS WINDOW, GAME LOOP AND KEYBOARD CONTROLLER
         pongWindow = new PongWindow();
         pongGameLoop = new PongGameLoop();
-        pongGameLoop.startGameLoop();
         keyboardController = new KeyboardController();
     }
 

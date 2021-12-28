@@ -5,6 +5,8 @@ import com.eurostudios.game_engine_classes.PongWindow;
 
 public class Enemy implements Entity {
 
+    public static boolean goingUp;
+    public static boolean goingDown;
     public static Color enemyColor = new Color(255,0,0);
     public static Color shadowColor = new Color(0,0,0, 30);
     public static double posX;
@@ -21,10 +23,25 @@ public class Enemy implements Entity {
 
     @Override
     public void update() {
-        double newPosiY = (posY + (Ball.posY - posY) - dimensions.height/2 + Ball.dimensions.height/2) * speedDecrement;
-        if (!(newPosiY > PongWindow.HEIGHT - PongWindow.MARGIN - dimensions.height)) { // ! > bottom
-            if (!(newPosiY < PongWindow.MARGIN)) { // ! < top
-                posY = newPosiY;
+
+        if (Menu.isPVE) {
+            double newPosiY = (posY + (Ball.posY - posY) - dimensions.height/2 + Ball.dimensions.height/2) * speedDecrement;
+            if (!(newPosiY > PongWindow.HEIGHT - PongWindow.MARGIN - dimensions.height)) { // ! > bottom
+                if (!(newPosiY < PongWindow.MARGIN)) { // ! < top
+                    posY = newPosiY;
+                }
+            }
+        }
+        else if (Menu.isPVP) {
+            if(goingUp) {
+                if (!(posY < + PongWindow.MARGIN)) {
+                    posY--;
+                }
+            }
+            else if(goingDown) {
+                if (!(posY + dimensions.getHeight() > PongWindow.HEIGHT - PongWindow.MARGIN)) {
+                    posY++;
+                }
             }
         }
     }

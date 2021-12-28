@@ -1,13 +1,17 @@
 package com.eurostudios.game_engine_classes;
 
-import com.eurostudios.entities.Entity;
+import com.eurostudios.entities.*;
+import com.eurostudios.entities.Menu;
+
 import java.awt.*;
 import java.awt.image.BufferStrategy;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 
+
 public class Render {
 
+    // game BackGround
     public class BackGround {
         private static int playerPoints;
         private static int enemyPoints;

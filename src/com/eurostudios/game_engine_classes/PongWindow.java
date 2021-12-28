@@ -20,7 +20,6 @@ public class PongWindow {
 
     private void initCanvas() {
         canvas.setPreferredSize(new Dimension(WIDTH*SCALE, HEIGHT*SCALE));
-
     }
 
     private void initFrame() {
@@ -29,9 +28,6 @@ public class PongWindow {
         frame.add(canvas); // adds a Canvas to the Frame
         frame.pack();
         frame.setLocationRelativeTo(null); // sets the default location in the middle of the screen
-        JButton button = new JButton("Press");
-        //BoxLayout boxLayout = new BoxLayout();
-        frame.getContentPane().add(button);
         frame.setVisible(true); // shows the frame
     }
 }
