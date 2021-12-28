@@ -4,10 +4,10 @@ import java.util.Random;
 public class Ball extends Entity {
 
     // can be 1 or -1 indicates the were the ball is going
-    public double dx;
-    public double dy;
+    public static double dx;
+    public static double dy;
 
-    public double speed = 1;
+    public static double speed = 1.15;
 
     public static int posX;
     public static int posY;
@@ -30,7 +30,7 @@ public class Ball extends Entity {
     @Override
     public void update() {
         // COLLISIONS WITH WALLS
-        if(posY + dx * speed + dimensions.height >= PongWindow.HEIGHT - movementMargin || posY + dy * speed < super.movementMargin) {
+        if(posY + dx * speed + dimensions.height >= PongWindow.HEIGHT - movementMargin || posY + dy * speed < movementMargin) {
             dy *= -1;
             System.out.println();
         }
@@ -50,14 +50,13 @@ public class Ball extends Entity {
         posX += dx * speed;
         posY += dy * speed;
 
-        if (posX >= PongWindow.WIDTH - super.movementMargin) {
-            // meu ponto
+        if (posX > PongWindow.WIDTH) { // player point
+            Render.BackGround.addPointToPlayer();
             PongGameLoop.resetEntities();
         }
-        else if (posX < super.movementMargin) {
+        else if (posX < 0) { // enemy point
+            Render.BackGround.addPointToEnemy();
             PongGameLoop.resetEntities();
-            // ponto do inimigo
-
         }
     }
 

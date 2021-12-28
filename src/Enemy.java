@@ -5,6 +5,7 @@ public class Enemy extends Entity {
     public static double posX;
     public static double posY;
     public static Dimension dimensions;
+    public static double speedDecrement = 0.9; // (0.01 <=> 1) the lowest the easiest, because the enemy slows down, 1 == impossible
 
     @Override
     public void start() {
@@ -15,7 +16,6 @@ public class Enemy extends Entity {
 
     @Override
     public void update() {
-        double speedDecrement = 0.9; // (0.01 <=> 1) the lowest the easiest, because the enemy slows down, 1 == impossible
         double newPosiY = (posY + (Ball.posY - posY) - dimensions.height/2 + Ball.dimensions.height/2) * speedDecrement;
         if (!(newPosiY > PongWindow.HEIGHT - super.movementMargin - dimensions.height)) { // ! > bottom
             if (!(newPosiY < super.movementMargin)) { // ! < top
