@@ -13,7 +13,6 @@ public class PongGameLoop implements Runnable {
         pongRender = new Render();
         player = new Player();
         new Thread(this).start();
-        PongWindow.canvas.addKeyListener(new KeyboardController());
     }
 
     void initEntities () { // adds the entities to its arraylist and calls start() method od the entities

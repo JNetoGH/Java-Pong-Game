@@ -7,6 +7,7 @@ public class KeyboardController implements KeyListener {
 
     KeyboardController () {
         player = PongGameLoop.player;
+        PongWindow.canvas.addKeyListener(this);
     }
 
     @Override
