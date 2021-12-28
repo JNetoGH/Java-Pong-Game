@@ -5,6 +5,7 @@ public class PongGameLoop implements Runnable {
     private static ArrayList<Entity> entityArrayList; // stores the entities
     private static Render pongRender; // used to render the game content
     public static Player player;
+    private static boolean reset;
 
     public PongGameLoop () { // inits the Thread of the game loop
         entityArrayList = new ArrayList<>();
@@ -13,7 +14,7 @@ public class PongGameLoop implements Runnable {
         new Thread(this).start();
     }
 
-    private void initEntities () { // adds the entities to its arraylist and calls start() method od the entities
+    public void initEntities () { // adds the entities to its arraylist and calls start() method od the entities
         entityArrayList.add(player);
         entityArrayList.add(new Enemy());
         entityArrayList.add(new Ball());
@@ -28,10 +29,19 @@ public class PongGameLoop implements Runnable {
         pongRender.render(entityArrayList);
     }
 
+    public static void resetEntities() {
+        reset = true;
+    }
+
     @Override
     public void run() {
         initEntities();
         while (true) {
+            if (reset) {
+                entityArrayList.clear();
+                initEntities();
+                reset = false;
+            }
             mainUpdate();
             mainRender();
             // 60 FPS LOCKER

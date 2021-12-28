@@ -29,37 +29,36 @@ public class Ball extends Entity {
 
     @Override
     public void update() {
-
         // COLLISIONS WITH WALLS
-        if(posY + dx * speed + dimensions.height >= PongWindow.HEIGHT - movementMargin) {
+        if(posY + dx * speed + dimensions.height >= PongWindow.HEIGHT - movementMargin || posY + dy * speed < super.movementMargin) {
             dy *= -1;
-        }
-        else if (posY + dy * speed < super.movementMargin) {
-            dy *= -1;
-        }
-
-        if (posX >= PongWindow.WIDTH - super.movementMargin) {
-            // meu ponto
-        }
-        else if (posX < super.movementMargin) {
-            // ponto do inimigo
+            System.out.println();
         }
 
         Rectangle ballHitBox = new Rectangle((int)(posX + dx * speed), (int)(posY + dy * speed), dimensions.width, dimensions.height);
         Rectangle playerHitBox = new Rectangle(Player.posX, Player.posY, Player.dimensions.width, Player.dimensions.height);
         Rectangle enemyHitBox = new Rectangle((int) Enemy.posX, (int) Enemy.posY, Enemy.dimensions.width, Enemy.dimensions.height);
 
-        // COLLISIONS WITH ENTITIES
-        if (ballHitBox.intersects(playerHitBox)) {
+        // COLLISIONS WITH ENTITIES: 30% of chance of change the dy in each tackle
+        if (ballHitBox.intersects(playerHitBox) || ballHitBox.intersects(enemyHitBox)) {
             dx *= -1;
-        }
-        else if (ballHitBox.intersects(enemyHitBox)) {
-            dx *= -1;
+            int num = new Random().nextInt(10) + 1; //1<=>10
+            if (num >= 8) dy*=-1;
         }
 
         // MOVES THE BALL
         posX += dx * speed;
         posY += dy * speed;
+
+        if (posX >= PongWindow.WIDTH - super.movementMargin) {
+            // meu ponto
+            PongGameLoop.resetEntities();
+        }
+        else if (posX < super.movementMargin) {
+            PongGameLoop.resetEntities();
+            // ponto do inimigo
+
+        }
     }
 
     @Override
