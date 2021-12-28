@@ -14,11 +14,11 @@ public class KeyboardController implements KeyListener {
     public void keyPressed(KeyEvent e) {
         int key = e.getKeyCode();
         switch (key) {
-            case KeyEvent.VK_RIGHT:
-                player.right = true;
+            case KeyEvent.VK_UP:
+                player.goingUp = true;
                 break;
-            case KeyEvent.VK_LEFT:
-                player.left = true;
+            case KeyEvent.VK_DOWN:
+                player.goingDown = true;
                 break;
         }
     }
@@ -27,11 +27,11 @@ public class KeyboardController implements KeyListener {
     public void keyReleased(KeyEvent e) {
         int key = e.getKeyCode();
         switch (key) {
-            case KeyEvent.VK_RIGHT:
-                player.right = false;
+            case KeyEvent.VK_UP:
+                player.goingUp = false;
                 break;
-            case KeyEvent.VK_LEFT:
-                player.left = false;
+            case KeyEvent.VK_DOWN:
+                player.goingDown = false;
                 break;
         }
     }

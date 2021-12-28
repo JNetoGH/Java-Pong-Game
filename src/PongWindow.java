@@ -5,7 +5,7 @@ public class PongWindow {
 
     public static JFrame frame = new JFrame();
     public static Canvas canvas = new  Canvas();
-    public static int WIDTH = 240;
+    public static int WIDTH = 200;
     public static int HEIGHT = 120;
     public static int SCALE = 3; //multiplies everything in the Canvas
 

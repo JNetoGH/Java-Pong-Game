@@ -1,8 +1,10 @@
 import java.awt.*;
 
 public abstract class Entity {
-    public boolean right;
-    public boolean left;
+    public int movementMargin = 10;
+    public Dimension dimensions;
+    public boolean goingUp;
+    public boolean goingDown;
     public int posX;
     public int posY;
     public abstract void start(); // called at the beginning of the game loop
