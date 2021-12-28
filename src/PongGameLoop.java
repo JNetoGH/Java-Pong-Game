@@ -1,5 +1,3 @@
-import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
 import java.util.ArrayList;
 
 public class PongGameLoop implements Runnable {
@@ -15,17 +13,15 @@ public class PongGameLoop implements Runnable {
         new Thread(this).start();
     }
 
-    void initEntities () { // adds the entities to its arraylist and calls start() method od the entities
+    private void initEntities () { // adds the entities to its arraylist and calls start() method od the entities
         entityArrayList.add(player);
-        for (Entity e: entityArrayList) {
-            e.start();
-        }
+        entityArrayList.add(new Enemy());
+        entityArrayList.add(new Ball());
+        for (Entity e: entityArrayList) e.start();
     }
 
     private void mainUpdate() { // calls entities' updates
-        for (Entity e: entityArrayList) {
-            e.update();
-        }
+        for (Entity e: entityArrayList) e.update();
     }
 
     private void mainRender() { // calls entities' render
@@ -38,9 +34,6 @@ public class PongGameLoop implements Runnable {
         while (true) {
             mainUpdate();
             mainRender();
-            System.out.println(player.posX);
-            System.out.println(player.posY);
-            System.out.println();
             // 60 FPS LOCKER
             try {
                 Thread.sleep(1000/60);

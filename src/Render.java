@@ -16,7 +16,7 @@ public class Render {
         Graphics graphics = layer.getGraphics();
 
         // CLEAN THE SCREEN UP WITH A RECT OF THE SAME SIZE THE NEW IMAGE WILL BE DREW ON TOP
-        graphics.setColor(Color.BLACK);
+        graphics.setColor(Color.DARK_GRAY);
         graphics.fillRect(0,0,PongWindow.WIDTH,PongWindow.HEIGHT);
 
         // ENTITIES RENDERING
