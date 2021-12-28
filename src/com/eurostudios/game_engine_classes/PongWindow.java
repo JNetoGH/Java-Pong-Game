@@ -5,12 +5,13 @@ import java.awt.*;
 
 public class PongWindow {
 
-    public static JFrame frame = new JFrame();
+    public static final String FRAME_NAME = "Super Pong";
+    public static JFrame frame = new JFrame(FRAME_NAME);
     public static Canvas canvas = new  Canvas();
-    public static int WIDTH = 170;
-    public static int HEIGHT = 140;
-    public static int MARGIN = 10;
-    public static int SCALE = 3; //multiplies everything in the Canvas
+    public static final int WIDTH = 170;
+    public static final int HEIGHT = 140;
+    public static final int MARGIN = 10;
+    public static final int SCALE = 3; //multiplies everything in the Canvas
 
     public PongWindow () {
         initCanvas();
@@ -19,6 +20,7 @@ public class PongWindow {
 
     private void initCanvas() {
         canvas.setPreferredSize(new Dimension(WIDTH*SCALE, HEIGHT*SCALE));
+
     }
 
     private void initFrame() {
@@ -27,6 +29,9 @@ public class PongWindow {
         frame.add(canvas); // adds a Canvas to the Frame
         frame.pack();
         frame.setLocationRelativeTo(null); // sets the default location in the middle of the screen
+        JButton button = new JButton("Press");
+        //BoxLayout boxLayout = new BoxLayout();
+        frame.getContentPane().add(button);
         frame.setVisible(true); // shows the frame
     }
 }

@@ -1,7 +1,6 @@
 package com.eurostudios.game_engine_classes;
 
 import com.eurostudios.entities.Entity;
-
 import java.awt.*;
 import java.awt.image.BufferStrategy;
 import java.awt.image.BufferedImage;
@@ -21,8 +20,8 @@ public class Render {
             graphics.fillRect(PongWindow.WIDTH/2-1, PongWindow.MARGIN, 3, PongWindow.HEIGHT - PongWindow.MARGIN*2);
             // Scoreboard
             graphics.setColor(Color.gray);
-            graphics.drawString(String.valueOf(playerPoints), PongWindow.WIDTH/2-11, 20);
-            graphics.drawString(String.valueOf(enemyPoints), PongWindow.WIDTH/2+4, 20);
+            graphics.drawString(String.valueOf(playerPoints), PongWindow.WIDTH/2-26, 20);
+            graphics.drawString(String.valueOf(enemyPoints), PongWindow.WIDTH/2+20, 20);
         }
     }
 

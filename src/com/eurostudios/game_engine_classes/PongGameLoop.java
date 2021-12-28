@@ -13,15 +13,25 @@ public class PongGameLoop implements Runnable {
     private static Render pongRender; // used to render the game content
     public static Player player;
     private static boolean reset;
+    private static Thread gameLoopThread;
 
     public PongGameLoop () { // inits the Thread of the game loop
         entityArrayList = new ArrayList<>();
         pongRender = new Render();
         player = new Player();
-        new Thread(this).start();
+        gameLoopThread = new Thread(this);
     }
 
-    public void initEntities () { // adds the entities to its arraylist and calls start() method od the entities
+    public void startGameLoop() {
+        gameLoopThread.start();
+    }
+    public void stopGameLoop() throws InterruptedException {
+        gameLoopThread.join();
+    }
+
+
+
+    private void initEntities () { // adds the entities to its arraylist and calls start() method od the entities
         entityArrayList.add(player);
         entityArrayList.add(new Enemy());
         entityArrayList.add(new Ball());
