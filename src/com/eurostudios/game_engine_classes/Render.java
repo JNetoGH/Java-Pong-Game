@@ -17,11 +17,16 @@ public class Render {
         private static int enemyPoints;
         public static void addPointToPlayer() {playerPoints++;}
         public static void addPointToEnemy() {enemyPoints++;}
+        public static void resetPoints() {
+            playerPoints = 0;
+            enemyPoints = 0;
+        }
         public void drawBackGround(Graphics graphics) {
             graphics.setColor(Color.DARK_GRAY);
             graphics.fillRect(0,0,PongWindow.WIDTH,PongWindow.HEIGHT);
             graphics.setColor(Color.gray);
             graphics.fillRect(PongWindow.WIDTH/2-1, PongWindow.MARGIN, 3, PongWindow.HEIGHT - PongWindow.MARGIN*2);
+            graphics.drawString("esc => menu", PongWindow.WIDTH/2-35, PongWindow.HEIGHT);
             // Scoreboard
             graphics.setColor(Color.gray);
             graphics.drawString(String.valueOf(playerPoints), PongWindow.WIDTH/2-26, 20);

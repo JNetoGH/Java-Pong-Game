@@ -1,6 +1,7 @@
 package com.eurostudios.game_engine_classes;
 
 import com.eurostudios.entities.Enemy;
+import com.eurostudios.entities.Menu;
 import com.eurostudios.entities.Player;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
@@ -26,6 +27,13 @@ public class KeyboardController implements KeyListener {
                 break;
             case KeyEvent.VK_S:
                 Player.goingDown = true;
+                break;
+            case KeyEvent.VK_ESCAPE:
+                Menu.isInMenu = true;
+                Menu.isPVP = false;
+                Menu.isPVE = false;
+                Render.BackGround.resetPoints();
+                PongGameLoop.resetEntities();
                 break;
         }
     }
