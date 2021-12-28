@@ -8,8 +8,8 @@ public class Player extends Entity{
 
     @Override
     public void update() {
-        /*if(this.right) this.posX++;
-        else if(this.left) this.posX--;*/
+        if(super.right) super.posX++;
+        else if(super.left) super.posX--;
     }
 
     @Override

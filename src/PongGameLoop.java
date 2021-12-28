@@ -1,12 +1,23 @@
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.util.ArrayList;
 
 public class PongGameLoop implements Runnable {
 
-    ArrayList<Entity> entityArrayList = new ArrayList<Entity>(); // stores the entities
-    Render pongRender = new Render(); // used to render the game content
+    private static ArrayList<Entity> entityArrayList; // stores the entities
+    private static Render pongRender; // used to render the game content
+    public static Player player;
 
-    void initEntities () { // adds the entities to its arraylist
-        entityArrayList.add(new Player());
+    public PongGameLoop () { // inits the Thread of the game loop
+        entityArrayList = new ArrayList<>();
+        pongRender = new Render();
+        player = new Player();
+        new Thread(this).start();
+        PongWindow.canvas.addKeyListener(new KeyboardController());
+    }
+
+    void initEntities () { // adds the entities to its arraylist and calls start() method od the entities
+        entityArrayList.add(player);
         for (Entity e: entityArrayList) {
             e.start();
         }
@@ -28,6 +39,9 @@ public class PongGameLoop implements Runnable {
         while (true) {
             mainUpdate();
             mainRender();
+            System.out.println(player.posX);
+            System.out.println(player.posY);
+            System.out.println();
             // 60 FPS LOCKER
             try {
                 Thread.sleep(1000/60);
@@ -36,4 +50,5 @@ public class PongGameLoop implements Runnable {
             }
         }
     }
+
 }

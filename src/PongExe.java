@@ -8,7 +8,7 @@ public class PongExe {
         // INITS WINDOW, GAME LOOP AND KEYBOARD CONTROLLER
         pongWindow = new PongWindow();
         pongGameLoop = new PongGameLoop();
-        new Thread(pongGameLoop).start();
+        keyboardController = new KeyboardController();
     }
 
     public static void main(String[] args) {
