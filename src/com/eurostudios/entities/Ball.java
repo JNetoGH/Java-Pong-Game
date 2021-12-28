@@ -1,20 +1,22 @@
 package com.eurostudios.entities;
 
 import java.awt.*;
+import java.awt.image.BufferedImage;
 import java.util.Random;
 import com.eurostudios.game_engine_classes.*;
 
 public class Ball implements Entity {
 
+    BufferedImage sprite;
+
+    public static double speed = 3;
+    public static double posX;
+    public static double posY;
+    public static Dimension dimensions;
+
     // can be 1 or -1 indicates the were the ball is going
     public static double dx;
     public static double dy;
-
-    public static double speed = 1;
-
-    public static int posX;
-    public static int posY;
-    public static Dimension dimensions;
 
     private double roundRandoms(double num) {
         if (num > 0) return 1;
@@ -23,11 +25,12 @@ public class Ball implements Entity {
 
     @Override
     public void start() {
-        dimensions = new Dimension(3,3);
+        sprite = new SpriteHandler("/covid_ball.png").getSprite();
+        dimensions = new Dimension(sprite.getWidth(),sprite.getHeight());
         posX = (int) (PongWindow.WIDTH/2-dimensions.getWidth());
         posY = (int) (PongWindow.HEIGHT/2-dimensions.getHeight());
-        this.dx = roundRandoms(new Random().nextGaussian());
-        this.dy = roundRandoms(new Random().nextGaussian());
+        dx = roundRandoms(new Random().nextGaussian());
+        dy = roundRandoms(new Random().nextGaussian());
     }
 
     @Override
@@ -39,7 +42,7 @@ public class Ball implements Entity {
         }
 
         Rectangle ballHitBox = new Rectangle((int)(posX + dx * speed), (int)(posY + dy * speed), dimensions.width, dimensions.height);
-        Rectangle playerHitBox = new Rectangle(Player.posX, Player.posY, Player.dimensions.width, Player.dimensions.height);
+        Rectangle playerHitBox = new Rectangle((int) Player.posX, (int) Player.posY, Player.dimensions.width, Player.dimensions.height);
         Rectangle enemyHitBox = new Rectangle((int) Enemy.posX, (int) Enemy.posY, Enemy.dimensions.width, Enemy.dimensions.height);
 
         // COLLISIONS WITH ENTITIES: 30% of chance of change the dy in each tackle
@@ -65,7 +68,6 @@ public class Ball implements Entity {
 
     @Override
     public void render(Graphics graphics) {
-        graphics.setColor(Color.WHITE); // picking a color or you can set manually g.setColor(new Color(19,19,19));
-        graphics.fillRect(posX, posY, (int) dimensions.getWidth(),(int) dimensions.getHeight()); // rendering a rectangle X, Y, WIDTH, HEIGHT
+        graphics.drawImage(sprite, (int) posX, (int) posY, null);
     }
 }

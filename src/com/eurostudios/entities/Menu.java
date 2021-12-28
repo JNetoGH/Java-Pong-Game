@@ -12,6 +12,7 @@ public class Menu implements Entity, MouseListener {
     public static boolean isPVE = false;
 
     public static Color shadowColor = new Color(0,0,0, 30);
+    public static Color darkTransparent = new Color(0,0,0, 225);
 
     public Menu() {
         PongWindow.canvas.addMouseListener(this);
@@ -50,16 +51,31 @@ public class Menu implements Entity, MouseListener {
                 graphics.fillRect(buttonFrame.x+1, buttonFrame.y+1, buttonFrame.width, buttonFrame.height);
             }
         }
-
     }
 
-    EuroStdsButton buttonPVP = new EuroStdsButton("PVP", PongWindow.MARGIN, 40, 50,25);
-    EuroStdsButton buttonPVE = new EuroStdsButton("PVE", PongWindow.WIDTH - PongWindow.MARGIN - 50, 40, 50,25);
+    private final EuroStdsButton buttonPVP = new EuroStdsButton("PVP", PongWindow.MARGIN*2, 40, 50,25);
+    private final EuroStdsButton buttonPVE = new EuroStdsButton("PVE", PongWindow.MARGIN*2, 80, 50,25);
+    private final EuroStdsButton buttonInfo = new EuroStdsButton("INF", PongWindow.MARGIN*2, 120, 50,25);
+    private final EuroStdsButton buttonExitInfo = new EuroStdsButton("  X", PongWindow.WIDTH/2-25, PongWindow.HEIGHT-PongWindow.MARGIN*4, 50,25);
+    private static boolean infoTrigger = false; // used to display the information menu
 
     @Override
     public void render(Graphics graphics) {
         buttonPVP.render(graphics);
         buttonPVE.render(graphics);
+        buttonInfo.render(graphics);
+        if (infoTrigger) { // information menu rendering
+            graphics.setColor(darkTransparent);
+            graphics.fillRect(PongWindow.MARGIN, PongWindow.MARGIN,
+                    PongWindow.WIDTH - PongWindow.MARGIN*2, PongWindow.HEIGHT - PongWindow.MARGIN*2);
+            graphics.setColor(Color.WHITE);
+            graphics.drawRect(PongWindow.MARGIN, PongWindow.MARGIN,
+                    PongWindow.WIDTH - PongWindow.MARGIN*2, PongWindow.HEIGHT - PongWindow.MARGIN*2);
+            graphics.drawString("PLAYER1:      PLAYER2:", PongWindow.MARGIN*2, PongWindow.MARGIN*2+10);
+            graphics.drawString("    W =>      UP      <= ▲ ", PongWindow.MARGIN*2, PongWindow.MARGIN*3+15);
+            graphics.drawString("    S =>   DOWN   <= ▼", PongWindow.MARGIN*2, PongWindow.MARGIN*4+20);
+            buttonExitInfo.render(graphics);
+        }
     }
 
     @Override
@@ -67,29 +83,47 @@ public class Menu implements Entity, MouseListener {
         if (isInMenu) {
             int axisX = e.getX()/PongWindow.SCALE;
             int axisY = e.getY()/PongWindow.SCALE;
-            if (axisX >= buttonPVP.buttonFrame.x && axisX <= buttonPVP.buttonFrame.x + buttonPVP.buttonFrame.width &&
-                    axisY >= buttonPVP.buttonFrame.y && axisY <= buttonPVP.buttonFrame.y + buttonPVP.buttonFrame.height) {
-                buttonPVP.isPressed = true;
+            if (!infoTrigger) { // can only press a button if its not on information menu
+                if (axisX >= buttonPVP.buttonFrame.x && axisX <= buttonPVP.buttonFrame.x + buttonPVP.buttonFrame.width &&
+                        axisY >= buttonPVP.buttonFrame.y && axisY <= buttonPVP.buttonFrame.y + buttonPVP.buttonFrame.height) {
+                    buttonPVP.isPressed = true;
+                }
+                else if (axisX >= buttonPVE.buttonFrame.x && axisX <= buttonPVE.buttonFrame.x + buttonPVE.buttonFrame.width &&
+                        axisY >= buttonPVE.buttonFrame.y && axisY <= buttonPVE.buttonFrame.y + buttonPVE.buttonFrame.height) {
+                    buttonPVE.isPressed = true;
+                }
+                else if (axisX >= buttonInfo.buttonFrame.x && axisX <= buttonInfo.buttonFrame.x + buttonInfo.buttonFrame.width &&
+                        axisY >= buttonInfo.buttonFrame.y && axisY <= buttonInfo.buttonFrame.y + buttonInfo.buttonFrame.height) {
+                    buttonInfo.isPressed = true;
+                }
             }
-            else if (axisX >= buttonPVE.buttonFrame.x && axisX <= buttonPVE.buttonFrame.x + buttonPVE.buttonFrame.width &&
-                    axisY >= buttonPVE.buttonFrame.y && axisY <= buttonPVE.buttonFrame.y + buttonPVE.buttonFrame.height) {
-                buttonPVE.isPressed = true;
+            else if (axisX >= buttonExitInfo.buttonFrame.x && axisX <= buttonExitInfo.buttonFrame.x + buttonExitInfo.buttonFrame.width &&
+                    axisY >= buttonExitInfo.buttonFrame.y && axisY <= buttonExitInfo.buttonFrame.y + buttonExitInfo.buttonFrame.height) {
+                buttonExitInfo.isPressed = true;
             }
         }
     }
     @Override
     public void mouseReleased(MouseEvent e) {
-        if (buttonPVP.isPressed) {
+        if (buttonPVP.isPressed && !infoTrigger) {
             buttonPVP.isPressed = false;
             isInMenu = false;
             isPVP = true;
             PongGameLoop.resetEntities();
         }
-        else if (buttonPVE.isPressed) {
+        else if (buttonPVE.isPressed && !infoTrigger) {
             buttonPVE.isPressed = false;
             isInMenu = false;
             isPVE = true;
             PongGameLoop.resetEntities();
+        }
+        else if (buttonInfo.isPressed) {
+            buttonInfo.isPressed = false;
+            infoTrigger = true;
+        }
+        else if(buttonExitInfo.isPressed) {
+            buttonExitInfo.isPressed = false;
+            infoTrigger = false;
         }
     }
     @Override

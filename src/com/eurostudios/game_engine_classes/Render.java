@@ -1,8 +1,6 @@
 package com.eurostudios.game_engine_classes;
 
 import com.eurostudios.entities.*;
-import com.eurostudios.entities.Menu;
-
 import java.awt.*;
 import java.awt.image.BufferStrategy;
 import java.awt.image.BufferedImage;

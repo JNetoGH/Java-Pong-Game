@@ -1,7 +1,6 @@
 package com.eurostudios.game_engine_classes;
 
 import com.eurostudios.entities.*;
-
 import java.util.ArrayList;
 
 public class PongGameLoop implements Runnable {

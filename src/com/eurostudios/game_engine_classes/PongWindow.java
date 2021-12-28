@@ -8,10 +8,10 @@ public class PongWindow {
     public static final String FRAME_NAME = "Super Pong";
     public static JFrame frame = new JFrame(FRAME_NAME);
     public static Canvas canvas = new  Canvas();
-    public static final int WIDTH = 170;
-    public static final int HEIGHT = 140;
+    public static final int WIDTH = 250;
+    public static final int HEIGHT = 300;
     public static final int MARGIN = 10;
-    public static final int SCALE = 3; //multiplies everything in the Canvas
+    public static final int SCALE = 2; //multiplies everything in the Canvas
 
     public PongWindow () {
         initCanvas();

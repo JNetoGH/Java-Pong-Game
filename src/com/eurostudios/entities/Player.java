@@ -1,21 +1,29 @@
 package com.eurostudios.entities;
 
 import java.awt.*;
-import com.eurostudios.game_engine_classes.PongWindow;
+import java.awt.image.BufferedImage;
 
-public class Player implements Entity{
+
+import com.eurostudios.game_engine_classes.PongWindow;
+import com.eurostudios.game_engine_classes.SpriteHandler;
+
+public class Player implements Entity {
 
     public static boolean goingUp;
     public static boolean goingDown;
-    public static Color shadowColor = new Color(0,0,0, 30);
-    public static int posX;
-    public static int posY;
+    public static double speed;
+    public static double posX;
+    public static double posY;
     public static Dimension dimensions;
 
+    BufferedImage sprite;
+    public static Color shadowColor = new Color(0,0,0, 30);
 
     @Override
     public void start() {
-        dimensions = new Dimension(5,15);
+        speed = 2.5;
+        sprite = new SpriteHandler("/vacina_1.png").getSprite();
+        dimensions = new Dimension(sprite.getWidth(),sprite.getHeight());
         posX = PongWindow.MARGIN;
         posY = (int) (PongWindow.HEIGHT/2-dimensions.getHeight()/2);
     }
@@ -23,24 +31,22 @@ public class Player implements Entity{
     @Override
     public void update() {
         if(goingUp) {
-            if (!(posY < + PongWindow.MARGIN)) {
-                posY--;
+            if (!(posY < PongWindow.MARGIN)) {
+                posY -= speed;
             }
         }
         else if(goingDown) {
             if (!(posY + dimensions.getHeight() > PongWindow.HEIGHT - PongWindow.MARGIN)) {
-                posY++;
+                posY += speed;
             }
         }
     }
 
     @Override
     public void render(Graphics graphics) {
-        //Shadows
-        graphics.setColor(shadowColor);
-        graphics.fillRect((int) posX-1, (int) posY+1, (int) dimensions.getWidth(),(int) dimensions.getHeight()); // rendering a rectangle X, Y, WIDTH, HEIGHT
         //Bar
         graphics.setColor(new Color(0,156,135)); // picking a color or you can set manually g.setColor(new Color(19,19,19));
-        graphics.fillRect(posX, posY, (int) dimensions.getWidth(),(int) dimensions.getHeight()); // rendering a rectangle X, Y, WIDTH, HEIGHT
+        graphics.fillRect((int) dimensions.getWidth()+PongWindow.MARGIN-2, (int) posY, 2,(int) dimensions.getHeight()); // rendering a rectangle X, Y, WIDTH, HEIGHT
+        graphics.drawImage(sprite, (int) posX, (int) posY, null);
     }
 }
