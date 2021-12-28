@@ -1,3 +1,5 @@
+package com.eurostudios.game_engine_classes;
+
 import javax.swing.*;
 import java.awt.*;
 
@@ -7,6 +9,7 @@ public class PongWindow {
     public static Canvas canvas = new  Canvas();
     public static int WIDTH = 170;
     public static int HEIGHT = 140;
+    public static int MARGIN = 10;
     public static int SCALE = 3; //multiplies everything in the Canvas
 
     public PongWindow () {

@@ -1,6 +1,9 @@
-import java.awt.*;
+package com.eurostudios.entities;
 
-public class Player extends Entity{
+import java.awt.*;
+import com.eurostudios.game_engine_classes.PongWindow;
+
+public class Player implements Entity{
 
     public static boolean goingUp;
     public static boolean goingDown;
@@ -12,19 +15,19 @@ public class Player extends Entity{
     @Override
     public void start() {
         dimensions = new Dimension(5,15);
-        posX = super.movementMargin;
+        posX = PongWindow.MARGIN;
         posY = (int) (PongWindow.HEIGHT/2-dimensions.getHeight()/2);
     }
 
     @Override
     public void update() {
         if(goingUp) {
-            if (!(posY < + super.movementMargin)) {
+            if (!(posY < + PongWindow.MARGIN)) {
                 posY--;
             }
         }
         else if(goingDown) {
-            if (!(posY + dimensions.getHeight() > PongWindow.HEIGHT - super.movementMargin)) {
+            if (!(posY + dimensions.getHeight() > PongWindow.HEIGHT - PongWindow.MARGIN)) {
                 posY++;
             }
         }

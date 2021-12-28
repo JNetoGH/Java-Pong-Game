@@ -1,3 +1,10 @@
+package com.eurostudios.game_engine_classes;
+
+import com.eurostudios.entities.Ball;
+import com.eurostudios.entities.Enemy;
+import com.eurostudios.entities.Entity;
+import com.eurostudios.entities.Player;
+
 import java.util.ArrayList;
 
 public class PongGameLoop implements Runnable {

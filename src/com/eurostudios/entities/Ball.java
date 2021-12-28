@@ -1,13 +1,16 @@
+package com.eurostudios.entities;
+
 import java.awt.*;
 import java.util.Random;
+import com.eurostudios.game_engine_classes.*;
 
-public class Ball extends Entity {
+public class Ball implements Entity {
 
     // can be 1 or -1 indicates the were the ball is going
     public static double dx;
     public static double dy;
 
-    public static double speed = 1.15;
+    public static double speed = 1;
 
     public static int posX;
     public static int posY;
@@ -30,7 +33,7 @@ public class Ball extends Entity {
     @Override
     public void update() {
         // COLLISIONS WITH WALLS
-        if(posY + dx * speed + dimensions.height >= PongWindow.HEIGHT - movementMargin || posY + dy * speed < movementMargin) {
+        if(posY + dx * speed + dimensions.height >= PongWindow.HEIGHT - PongWindow.MARGIN || posY + dy * speed < PongWindow.MARGIN) {
             dy *= -1;
             System.out.println();
         }

@@ -1,3 +1,7 @@
+package com.eurostudios.game_engine_classes;
+
+import com.eurostudios.entities.Player;
+
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 

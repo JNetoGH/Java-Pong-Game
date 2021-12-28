@@ -1,6 +1,9 @@
-import java.awt.*;
+package com.eurostudios.entities;
 
-public class Enemy extends Entity {
+import java.awt.*;
+import com.eurostudios.game_engine_classes.PongWindow;
+
+public class Enemy implements Entity {
 
     public static double posX;
     public static double posY;
@@ -10,15 +13,15 @@ public class Enemy extends Entity {
     @Override
     public void start() {
         dimensions = new Dimension(5,15);
-        posX = (int) (PongWindow.WIDTH - super.movementMargin - dimensions.getWidth());
+        posX = (int) (PongWindow.WIDTH - PongWindow.MARGIN - dimensions.getWidth());
         posY = (int) (PongWindow.HEIGHT/2-dimensions.getHeight()/2);
     }
 
     @Override
     public void update() {
         double newPosiY = (posY + (Ball.posY - posY) - dimensions.height/2 + Ball.dimensions.height/2) * speedDecrement;
-        if (!(newPosiY > PongWindow.HEIGHT - super.movementMargin - dimensions.height)) { // ! > bottom
-            if (!(newPosiY < super.movementMargin)) { // ! < top
+        if (!(newPosiY > PongWindow.HEIGHT - PongWindow.MARGIN - dimensions.height)) { // ! > bottom
+            if (!(newPosiY < PongWindow.MARGIN)) { // ! < top
                 posY = newPosiY;
             }
         }
