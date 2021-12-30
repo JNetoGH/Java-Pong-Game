@@ -4,11 +4,10 @@ import java.awt.*;
 
 public class EuroStdsButton {
 
+    public static Color shadowColor = new Color(0,0,0, 30);
     public boolean isPressed = false;
     public Rectangle buttonFrame;
     private String str3char;
-    private static Color shadowColor = new Color(0,0,0, 30);
-
     EuroStdsButton(String str3char, int x, int y, int width, int height) {
         buttonFrame = new Rectangle(x, y, width, height);
         this.str3char = str3char;

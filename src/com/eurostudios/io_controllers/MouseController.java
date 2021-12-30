@@ -1,7 +1,7 @@
-package com.eurostudios.IO_controllers;
+package com.eurostudios.io_controllers;
 
-import com.eurostudios.game_engine_classes.GameLoop;
-import com.eurostudios.game_engine_classes.AppWindow;
+import com.eurostudios.game_engine_classes.PongGameLoop;
+import com.eurostudios.game_engine_classes.PongWindow;
 
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
@@ -10,15 +10,16 @@ import static com.eurostudios.entities.Menu.*;
 
 public class MouseController implements MouseListener {
 
+
     public MouseController() {
-        AppWindow.canvas.addMouseListener(this);
+        PongWindow.canvas.addMouseListener(this);
     }
 
     @Override
     public void mousePressed(MouseEvent e) {
         if (isInMenu) {
-            int axisX = e.getX()/ AppWindow.SCALE;
-            int axisY = e.getY()/ AppWindow.SCALE;
+            int axisX = e.getX()/ PongWindow.SCALE;
+            int axisY = e.getY()/PongWindow.SCALE;
             if (!infoTrigger) { // can only press a button if its not on information menu
                 if (axisX >= buttonPVP.buttonFrame.x && axisX <= buttonPVP.buttonFrame.x + buttonPVP.buttonFrame.width &&
                         axisY >= buttonPVP.buttonFrame.y && axisY <= buttonPVP.buttonFrame.y + buttonPVP.buttonFrame.height) {
@@ -45,13 +46,13 @@ public class MouseController implements MouseListener {
             buttonPVP.isPressed = false;
             isInMenu = false;
             isPVP = true;
-            GameLoop.resetEntities();
+            PongGameLoop.resetEntities();
         }
         else if (buttonPVE.isPressed && !infoTrigger) {
             buttonPVE.isPressed = false;
             isInMenu = false;
             isPVE = true;
-            GameLoop.resetEntities();
+            PongGameLoop.resetEntities();
         }
         else if (buttonInfo.isPressed) {
             buttonInfo.isPressed = false;
@@ -68,6 +69,4 @@ public class MouseController implements MouseListener {
     public void mouseEntered(MouseEvent e) {}
     @Override
     public void mouseExited(MouseEvent e) {}
-
-
 }

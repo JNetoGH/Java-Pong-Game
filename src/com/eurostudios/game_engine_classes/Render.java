@@ -5,6 +5,7 @@ import java.awt.image.BufferStrategy;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 
+
 public class Render {
 
     // game BackGround
@@ -19,24 +20,23 @@ public class Render {
         }
         public void drawBackGround(Graphics graphics) {
             graphics.setColor(Color.DARK_GRAY);
-            graphics.fillRect(0,0, AppWindow.WIDTH, AppWindow.HEIGHT);
+            graphics.fillRect(0,0,PongWindow.WIDTH,PongWindow.HEIGHT);
             graphics.setColor(Color.gray);
-            graphics.fillRect(AppWindow.WIDTH/2-1, AppWindow.MARGIN, 3, AppWindow.HEIGHT - AppWindow.MARGIN*2);
-            graphics.drawString("esc => menu", AppWindow.WIDTH/2-35, AppWindow.HEIGHT);
+            graphics.fillRect(PongWindow.WIDTH/2-1, PongWindow.MARGIN, 3, PongWindow.HEIGHT - PongWindow.MARGIN*2);
+            graphics.drawString("esc => menu", PongWindow.WIDTH/2-35, PongWindow.HEIGHT);
             // Scoreboard
             graphics.setColor(Color.gray);
-            graphics.drawString(String.valueOf(playerPoints), AppWindow.WIDTH/2-26, 20);
-            graphics.drawString(String.valueOf(enemyPoints), AppWindow.WIDTH/2+20, 20);
+            graphics.drawString(String.valueOf(playerPoints), PongWindow.WIDTH/2-26, 20);
+            graphics.drawString(String.valueOf(enemyPoints), PongWindow.WIDTH/2+20, 20);
         }
     }
 
     BackGround backGround = new BackGround();
-    public static BufferedImage layer = new BufferedImage(AppWindow.WIDTH, AppWindow.HEIGHT, BufferedImage.TYPE_INT_RGB);  // a image layer where our graphics will be rendered
-
+    public static BufferedImage layer = new BufferedImage(PongWindow.WIDTH, PongWindow.HEIGHT, BufferedImage.TYPE_INT_RGB);  // a image layer where our graphics will be rendered
     public void render(ArrayList<Entity> entityArrayList) { // calls entities' render
-        BufferStrategy bufferStrategy = AppWindow.canvas.getBufferStrategy(); // a sequence of buffers we put on screen to optimize the rendering
+        BufferStrategy bufferStrategy = PongWindow.canvas.getBufferStrategy(); // a sequence of buffers we put on screen to optimize the rendering
         if (bufferStrategy == null) {   // the first bufferStrategy comes null, so it's required to create a new one
-            AppWindow.canvas.createBufferStrategy(3); 	// the ideal is between 2 or 3, it enhances the game performance
+            PongWindow.canvas.createBufferStrategy(3); 	// the ideal is between 2 or 3, it enhances the game performance
             return;	// used just to break the method because on next loop there will already exist a buffer
         }
         Graphics graphics = layer.getGraphics();
@@ -51,7 +51,7 @@ public class Render {
 
         // SCALES THE ELEMENTS UP AND SHOWS IT
         graphics = bufferStrategy.getDrawGraphics();
-        graphics.drawImage(layer, 0, 0, AppWindow.WIDTH* AppWindow.SCALE, AppWindow.HEIGHT* AppWindow.SCALE, null);
+        graphics.drawImage(layer, 0, 0, PongWindow.WIDTH*PongWindow.SCALE, PongWindow.HEIGHT*PongWindow.SCALE, null);
         bufferStrategy.show();
     }
 }
