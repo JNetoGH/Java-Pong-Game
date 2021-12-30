@@ -5,6 +5,7 @@ import java.awt.image.BufferedImage;
 import java.io.IOException;
 
 public class SpriteHandler {
+
     private BufferedImage sprite;
 
     public SpriteHandler (String path) {

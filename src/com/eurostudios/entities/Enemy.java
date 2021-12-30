@@ -3,7 +3,8 @@ package com.eurostudios.entities;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 
-import com.eurostudios.game_engine_classes.PongWindow;
+import com.eurostudios.game_engine_classes.AppWindow;
+import com.eurostudios.game_engine_classes.Entity;
 import com.eurostudios.game_engine_classes.SpriteHandler;
 
 public class Enemy implements Entity {
@@ -23,28 +24,28 @@ public class Enemy implements Entity {
     public void start() {
         sprite = new SpriteHandler("/vacina_2.png").getSprite();
         dimensions = new Dimension(sprite.getWidth(), sprite.getHeight());
-        posX = (int) (PongWindow.WIDTH - PongWindow.MARGIN - dimensions.getWidth());
-        posY = (int) (PongWindow.HEIGHT/2-dimensions.getHeight()/2);
+        posX = (int) (AppWindow.WIDTH - AppWindow.MARGIN - dimensions.getWidth());
+        posY = (int) (AppWindow.HEIGHT/2-dimensions.getHeight()/2);
     }
 
     @Override
     public void update() {
         if (Menu.isPVE) {
             double newPosiY = (posY + (Ball.posY - posY) - dimensions.height/2 + Ball.dimensions.height/2) * speedDecrement;
-            if (!(newPosiY > PongWindow.HEIGHT - PongWindow.MARGIN - dimensions.height)) { // ! > bottom
-                if (!(newPosiY < PongWindow.MARGIN)) { // ! < top
+            if (!(newPosiY > AppWindow.HEIGHT - AppWindow.MARGIN - dimensions.height)) { // ! > bottom
+                if (!(newPosiY < AppWindow.MARGIN)) { // ! < top
                     posY = newPosiY;
                 }
             }
         }
         else if (Menu.isPVP) {
             if(goingUp) {
-                if (!(posY < PongWindow.MARGIN)) {
+                if (!(posY < AppWindow.MARGIN)) {
                     posY -= speed;
                 }
             }
             else if(goingDown) {
-                if (!(posY + dimensions.getHeight() > PongWindow.HEIGHT - PongWindow.MARGIN)) {
+                if (!(posY + dimensions.getHeight() > AppWindow.HEIGHT - AppWindow.MARGIN)) {
                     posY += speed;
                 }
             }

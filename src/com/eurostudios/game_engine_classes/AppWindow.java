@@ -3,17 +3,17 @@ package com.eurostudios.game_engine_classes;
 import javax.swing.*;
 import java.awt.*;
 
-public class PongWindow {
+public class AppWindow {
 
     public static final String FRAME_NAME = "Super Pong";
     public static JFrame frame = new JFrame(FRAME_NAME);
     public static Canvas canvas = new  Canvas();
-    public static final int WIDTH = 250;
+    public static final int WIDTH = 300;
     public static final int HEIGHT = 300;
     public static final int MARGIN = 10;
     public static final int SCALE = 2; //multiplies everything in the Canvas
 
-    public PongWindow () {
+    public AppWindow() {
         initCanvas();
         initFrame();
     }
