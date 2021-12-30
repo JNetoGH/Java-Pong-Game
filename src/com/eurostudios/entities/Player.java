@@ -16,28 +16,26 @@ public class Player implements Entity {
     public static double posX;
     public static double posY;
     public static Dimension dimensions;
-
     private BufferedImage sprite;
-    public static Color shadowColor = new Color(0,0,0, 30);
 
     @Override
     public void start() {
         speed = 2.5;
         sprite = new SpriteHandler("/vacina_1.png").getSprite();
         dimensions = new Dimension(sprite.getWidth(),sprite.getHeight());
-        posX = AppWindow.MARGIN;
+        posX = GraphicalSettings.LATERAL_MARGIN;
         posY = (int) (AppWindow.HEIGHT/2-dimensions.getHeight()/2);
     }
 
     @Override
     public void update() {
         if(goingUp) {
-            if (!(posY < AppWindow.MARGIN)) {
+            if (!(posY < GraphicalSettings.TOP_MARGIN)) {
                 posY -= speed;
             }
         }
         else if(goingDown) {
-            if (!(posY + dimensions.getHeight() > AppWindow.HEIGHT - AppWindow.MARGIN)) {
+            if (!(posY + dimensions.getHeight() > AppWindow.HEIGHT - GraphicalSettings.BOTTOM_MARGIN)) {
                 posY += speed;
             }
         }
@@ -47,7 +45,8 @@ public class Player implements Entity {
     public void render(Graphics graphics) {
         //Bar
         graphics.setColor(new Color(0,156,135)); // picking a color or you can set manually g.setColor(new Color(19,19,19));
-        graphics.fillRect((int) dimensions.getWidth()+ AppWindow.MARGIN-2, (int) posY, 2,(int) dimensions.getHeight()); // rendering a rectangle X, Y, WIDTH, HEIGHT
+        graphics.fillRect((int) dimensions.getWidth() + GraphicalSettings.LATERAL_MARGIN - 2, (int) posY, 2,
+                (int) dimensions.getHeight()); // rendering a rectangle X, Y, WIDTH, HEIGHT
         graphics.drawImage(sprite, (int) posX, (int) posY, null);
     }
 }

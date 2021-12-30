@@ -10,7 +10,6 @@ public class AppWindow {
     public static Canvas canvas = new  Canvas();
     public static final int WIDTH = 250;
     public static final int HEIGHT = 300;
-    public static final int MARGIN = 10;
     public static final int SCALE = 2; //multiplies everything in the Canvas
 
     public AppWindow() {

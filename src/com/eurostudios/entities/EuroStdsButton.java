@@ -17,7 +17,7 @@ public class EuroStdsButton {
     public void render(Graphics graphics) {
         if (!isPressed) {
             graphics.setColor(shadowColor);
-            graphics.fillRect(buttonFrame.x+3, buttonFrame.y+3, buttonFrame.width, buttonFrame.height);
+            graphics.fillRect(buttonFrame.x + 3, buttonFrame.y + 3, buttonFrame.width, buttonFrame.height);
             graphics.setColor(Color.WHITE);
             graphics.fillRect(buttonFrame.x, buttonFrame.y, buttonFrame.width, buttonFrame.height);
             graphics.setColor(Color.DARK_GRAY);
@@ -25,13 +25,13 @@ public class EuroStdsButton {
         }
         else {
             graphics.setColor(shadowColor);
-            graphics.fillRect(buttonFrame.x+3, buttonFrame.y+3, buttonFrame.width, buttonFrame.height);
+            graphics.fillRect(buttonFrame.x + 3, buttonFrame.y + 3, buttonFrame.width, buttonFrame.height);
             graphics.setColor(Color.WHITE);
-            graphics.fillRect(buttonFrame.x+1, buttonFrame.y+1, buttonFrame.width, buttonFrame.height);
+            graphics.fillRect(buttonFrame.x + 1, buttonFrame.y + 1, buttonFrame.width, buttonFrame.height);
             graphics.setColor(Color.DARK_GRAY);
-            graphics.drawString(str3char, buttonFrame.x + 14 +1, buttonFrame.y + 18 +1);
+            graphics.drawString(str3char, buttonFrame.x + 14 + 1, buttonFrame.y + 18 + 1);
             graphics.setColor(shadowColor);
-            graphics.fillRect(buttonFrame.x+1, buttonFrame.y+1, buttonFrame.width, buttonFrame.height);
+            graphics.fillRect(buttonFrame.x + 1, buttonFrame.y + 1, buttonFrame.width, buttonFrame.height);
         }
     }
 

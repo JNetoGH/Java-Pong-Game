@@ -24,7 +24,7 @@ public class Enemy implements Entity {
     public void start() {
         sprite = new SpriteHandler("/vacina_2.png").getSprite();
         dimensions = new Dimension(sprite.getWidth(), sprite.getHeight());
-        posX = (int) (AppWindow.WIDTH - AppWindow.MARGIN - dimensions.getWidth());
+        posX = (int) (AppWindow.WIDTH - GraphicalSettings.LATERAL_MARGIN - dimensions.getWidth());
         posY = (int) (AppWindow.HEIGHT/2-dimensions.getHeight()/2);
     }
 
@@ -32,20 +32,20 @@ public class Enemy implements Entity {
     public void update() {
         if (Menu.isPVE) {
             double newPosiY = (posY + (Ball.posY - posY) - dimensions.height/2 + Ball.dimensions.height/2) * speedDecrement;
-            if (!(newPosiY > AppWindow.HEIGHT - AppWindow.MARGIN - dimensions.height)) { // ! > bottom
-                if (!(newPosiY < AppWindow.MARGIN)) { // ! < top
+            if (!(newPosiY > AppWindow.HEIGHT - GraphicalSettings.BOTTOM_MARGIN - dimensions.height)) { // ! > bottom
+                if (!(newPosiY < GraphicalSettings.TOP_MARGIN)) { // ! < top
                     posY = newPosiY;
                 }
             }
         }
         else if (Menu.isPVP) {
             if(goingUp) {
-                if (!(posY < AppWindow.MARGIN)) {
+                if (!(posY < GraphicalSettings.TOP_MARGIN)) {
                     posY -= speed;
                 }
             }
             else if(goingDown) {
-                if (!(posY + dimensions.getHeight() > AppWindow.HEIGHT - AppWindow.MARGIN)) {
+                if (!(posY + dimensions.getHeight() > AppWindow.HEIGHT - GraphicalSettings.BOTTOM_MARGIN)) {
                     posY += speed;
                 }
             }

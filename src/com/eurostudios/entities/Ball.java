@@ -8,13 +8,12 @@ import com.eurostudios.game_engine_classes.*;
 public class Ball implements Entity {
 
     private BufferedImage sprite;
-
-    public static double speed = 3;
+    public static double speed;
     public static double posX;
     public static double posY;
     public static Dimension dimensions;
 
-    // can be 1 or -1 indicates the were the ball is going
+    // can be 1 or -1 indicates were the ball is going
     public static double dx;
     public static double dy;
 
@@ -27,18 +26,36 @@ public class Ball implements Entity {
     public void start() {
         sprite = new SpriteHandler("/covid_ball.png").getSprite();
         dimensions = new Dimension(sprite.getWidth(),sprite.getHeight());
+        speed = 3;
         posX = (int) (AppWindow.WIDTH/2-dimensions.getWidth());
         posY = (int) (AppWindow.HEIGHT/2-dimensions.getHeight());
         dx = roundRandoms(new Random().nextGaussian());
         dy = roundRandoms(new Random().nextGaussian());
     }
 
+    private boolean enhanced = false;
+    private double additive = 0.5;
+    private int totSecToEnhancement = 5;
+    private void enhanceSpeed() {
+        if (GameLoop.getTotTimeInSeconds() != 0 && GameLoop.getTotTimeInSeconds() % totSecToEnhancement == 0 && !enhanced) {
+            enhanced = true;
+            speed += additive;
+        }
+        if (GameLoop.getTotTimeInSeconds() % totSecToEnhancement != 0) {
+            enhanced = false;
+        }
+    }
+
     @Override
     public void update() {
+
+        // enhances ball speed fo each 15 seconds
+        enhanceSpeed();
+
         // COLLISIONS WITH WALLS
-        if(posY + dx * speed + dimensions.height >= AppWindow.HEIGHT - AppWindow.MARGIN || posY + dy * speed < AppWindow.MARGIN) {
+        if(posY + dx * speed + dimensions.height >= AppWindow.HEIGHT - GraphicalSettings.BOTTOM_MARGIN||
+                posY + dy * speed < GraphicalSettings.TOP_MARGIN) {
             dy *= -1;
-            System.out.println();
         }
 
         Rectangle ballHitBox = new Rectangle((int)(posX + dx * speed), (int)(posY + dy * speed), dimensions.width, dimensions.height);
