@@ -3,14 +3,14 @@ package com.eurostudios.game_engine_classes;
 import com.eurostudios.entities.*;
 import java.util.ArrayList;
 
-public class PongGameLoop implements Runnable {
+public class GameLoop implements Runnable {
 
     private static ArrayList<Entity> entityArrayList; // stores the entities
     private static Render pongRender; // used to render the game content
 
     private static boolean reset;
 
-    public PongGameLoop () { // inits the Thread of the game loop
+    public GameLoop() { // inits the Thread of the game loop
         entityArrayList = new ArrayList<>();
         pongRender = new Render();
         new Thread(this).start();
@@ -21,11 +21,15 @@ public class PongGameLoop implements Runnable {
     }
 
     private void initEntities () { // adds the entities to its arraylist and calls start() method od the entities
+
+        // CURRENT FASE
+        entityArrayList.add(new BackGround());
         if (!Menu.isInMenu) {
             entityArrayList.add(new Player());
             entityArrayList.add(new Enemy());
             entityArrayList.add(new Ball());
         }
+        // MENU
         else {
             entityArrayList.add(new Menu());
         }

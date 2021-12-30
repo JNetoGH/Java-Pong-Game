@@ -4,14 +4,16 @@ import java.awt.*;
 
 public class EuroStdsButton {
 
-    public static Color shadowColor = new Color(0,0,0, 30);
+    private static Color shadowColor = new Color(0,0,0, 30);
     public boolean isPressed = false;
     public Rectangle buttonFrame;
     private String str3char;
+
     EuroStdsButton(String str3char, int x, int y, int width, int height) {
         buttonFrame = new Rectangle(x, y, width, height);
         this.str3char = str3char;
     }
+
     public void render(Graphics graphics) {
         if (!isPressed) {
             graphics.setColor(shadowColor);
@@ -32,4 +34,5 @@ public class EuroStdsButton {
             graphics.fillRect(buttonFrame.x+1, buttonFrame.y+1, buttonFrame.width, buttonFrame.height);
         }
     }
+
 }

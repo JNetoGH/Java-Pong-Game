@@ -5,15 +5,15 @@ import com.eurostudios.io_controllers.MouseController;
 
 public class PongExe {
 
-    public static PongWindow pongWindow;
-    public static PongGameLoop pongGameLoop;
+    public static AppWindow pongWindow;
+    public static GameLoop pongGameLoop;
     public static KeyboardController keyboardController;
     public static MouseController mouseController;
 
     public PongExe() {
         // INITS WINDOW, GAME LOOP AND KEYBOARD CONTROLLER
-        pongWindow = new PongWindow();
-        pongGameLoop = new PongGameLoop();
+        pongWindow = new AppWindow();
+        pongGameLoop = new GameLoop();
         keyboardController = new KeyboardController();
         mouseController = new MouseController();
 

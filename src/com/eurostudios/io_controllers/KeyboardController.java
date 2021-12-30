@@ -1,19 +1,18 @@
 package com.eurostudios.io_controllers;
 
+import com.eurostudios.entities.BackGround;
 import com.eurostudios.entities.Enemy;
 import com.eurostudios.entities.Menu;
 import com.eurostudios.entities.Player;
-import com.eurostudios.game_engine_classes.PongGameLoop;
-import com.eurostudios.game_engine_classes.PongWindow;
-import com.eurostudios.game_engine_classes.Render;
-
+import com.eurostudios.game_engine_classes.GameLoop;
+import com.eurostudios.game_engine_classes.AppWindow;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
 public class KeyboardController implements KeyListener {
 
     public KeyboardController() {
-        PongWindow.canvas.addKeyListener(this);
+        AppWindow.canvas.addKeyListener(this);
     }
 
     @Override
@@ -36,8 +35,8 @@ public class KeyboardController implements KeyListener {
                 Menu.isInMenu = true;
                 Menu.isPVP = false;
                 Menu.isPVE = false;
-                Render.BackGround.resetPoints();
-                PongGameLoop.resetEntities();
+                BackGround.resetPoints();
+                GameLoop.resetEntities();
                 break;
         }
     }

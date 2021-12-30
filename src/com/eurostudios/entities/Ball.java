@@ -7,7 +7,7 @@ import com.eurostudios.game_engine_classes.*;
 
 public class Ball implements Entity {
 
-    BufferedImage sprite;
+    private BufferedImage sprite;
 
     public static double speed = 3;
     public static double posX;
@@ -27,8 +27,8 @@ public class Ball implements Entity {
     public void start() {
         sprite = new SpriteHandler("/covid_ball.png").getSprite();
         dimensions = new Dimension(sprite.getWidth(),sprite.getHeight());
-        posX = (int) (PongWindow.WIDTH/2-dimensions.getWidth());
-        posY = (int) (PongWindow.HEIGHT/2-dimensions.getHeight());
+        posX = (int) (AppWindow.WIDTH/2-dimensions.getWidth());
+        posY = (int) (AppWindow.HEIGHT/2-dimensions.getHeight());
         dx = roundRandoms(new Random().nextGaussian());
         dy = roundRandoms(new Random().nextGaussian());
     }
@@ -36,7 +36,7 @@ public class Ball implements Entity {
     @Override
     public void update() {
         // COLLISIONS WITH WALLS
-        if(posY + dx * speed + dimensions.height >= PongWindow.HEIGHT - PongWindow.MARGIN || posY + dy * speed < PongWindow.MARGIN) {
+        if(posY + dx * speed + dimensions.height >= AppWindow.HEIGHT - AppWindow.MARGIN || posY + dy * speed < AppWindow.MARGIN) {
             dy *= -1;
             System.out.println();
         }
@@ -56,13 +56,13 @@ public class Ball implements Entity {
         posX += dx * speed;
         posY += dy * speed;
 
-        if (posX > PongWindow.WIDTH) { // player point
-            Render.BackGround.addPointToPlayer();
-            PongGameLoop.resetEntities();
+        if (posX > AppWindow.WIDTH) { // player point
+            BackGround.addPointToPlayer();
+            GameLoop.resetEntities();
         }
         else if (posX < 0) { // enemy point
-            Render.BackGround.addPointToEnemy();
-            PongGameLoop.resetEntities();
+            BackGround.addPointToEnemy();
+            GameLoop.resetEntities();
         }
     }
 
