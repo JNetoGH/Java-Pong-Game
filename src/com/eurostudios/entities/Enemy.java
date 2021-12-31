@@ -18,7 +18,7 @@ public class Enemy implements Entity {
     public static double posY;
     public static double speed = 2.5;
     public static Dimension dimensions;
-    public static double speedDecrement = 0.9; // (0.01 <=> 1) the lowest the easiest, because the enemy slows down, 1 == impossible
+    public static double speedDecrement = 0.8; // (0.01 <=> 1) the lowest the easiest, because the enemy slows down, 1 == impossible
 
     @Override
     public void start() {

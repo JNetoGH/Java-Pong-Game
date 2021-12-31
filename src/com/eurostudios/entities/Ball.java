@@ -8,7 +8,6 @@ import com.eurostudios.game_engine_classes.*;
 public class Ball implements Entity {
 
     private BufferedImage sprite;
-    public static double speed;
     public static double posX;
     public static double posY;
     public static Dimension dimensions;
@@ -17,25 +16,11 @@ public class Ball implements Entity {
     public static double dx;
     public static double dy;
 
-    private double roundRandoms(double num) {
-        if (num > 0) return 1;
-        else return  -1;
-    }
-
-    @Override
-    public void start() {
-        sprite = new SpriteHandler("/covid_ball.png").getSprite();
-        dimensions = new Dimension(sprite.getWidth(),sprite.getHeight());
-        speed = 3;
-        posX = (int) (AppWindow.WIDTH/2-dimensions.getWidth());
-        posY = (int) (AppWindow.HEIGHT/2-dimensions.getHeight());
-        dx = roundRandoms(new Random().nextGaussian());
-        dy = roundRandoms(new Random().nextGaussian());
-    }
-
-    private boolean enhanced = false;
-    private double additive = 0.5;
-    private int totSecToEnhancement = 5;
+    private static boolean enhanced = false;
+    private static double additive = 0.5;
+    private static int totSecToEnhancement = 5;
+    private static double initialSpeed = 2;
+    public static double speed;
     private void enhanceSpeed() {
         if (GameLoop.getTotTimeInSeconds() != 0 && GameLoop.getTotTimeInSeconds() % totSecToEnhancement == 0 && !enhanced) {
             enhanced = true;
@@ -45,6 +30,23 @@ public class Ball implements Entity {
             enhanced = false;
         }
     }
+
+    private double roundGaussian(double num) {
+        if (num > 0) return 1;
+        else return  -1;
+    }
+
+    @Override
+    public void start() {
+        sprite = new SpriteHandler("/covid_ball.png").getSprite();
+        dimensions = new Dimension(sprite.getWidth(),sprite.getHeight());
+        speed = initialSpeed;
+        posX = (int) (AppWindow.WIDTH/2-dimensions.getWidth());
+        posY = (int) (AppWindow.HEIGHT/2-dimensions.getHeight());
+        dx = roundGaussian(new Random().nextGaussian());
+        dy = roundGaussian(new Random().nextGaussian());
+    }
+
 
     @Override
     public void update() {
@@ -58,6 +60,7 @@ public class Ball implements Entity {
             dy *= -1;
         }
 
+        // ENTITIES HIT BOXES
         Rectangle ballHitBox = new Rectangle((int)(posX + dx * speed), (int)(posY + dy * speed), dimensions.width, dimensions.height);
         Rectangle playerHitBox = new Rectangle((int) Player.posX, (int) Player.posY, Player.dimensions.width, Player.dimensions.height);
         Rectangle enemyHitBox = new Rectangle((int) Enemy.posX, (int) Enemy.posY, Enemy.dimensions.width, Enemy.dimensions.height);
@@ -66,7 +69,7 @@ public class Ball implements Entity {
         if (ballHitBox.intersects(playerHitBox) || ballHitBox.intersects(enemyHitBox)) {
             dx *= -1;
             int num = new Random().nextInt(10) + 1; //1<=>10
-            if (num >= 8) dy*=-1;
+            if (num >= 8) dy *= -1;
         }
 
         // MOVES THE BALL
